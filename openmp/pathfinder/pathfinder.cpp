@@ -86,7 +86,7 @@ int main(int argc, char** argv)
     /// Calculate Elapsed Time
     std::chrono::duration<double> elapsed_seconds_move = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
     elapsedTime = elapsed_seconds_move.count();
-    printf("Elapsed Time: %f", elapsedTime);
+    printf("Elapsed Time: %f \n", elapsedTime);
 
     return EXIT_SUCCESS;
 }
