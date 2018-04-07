@@ -4,6 +4,7 @@
 #include <assert.h>
 
 #include "timer.h"
+#include <chrono>
 
 void run(int argc, char** argv);
 
@@ -73,7 +74,19 @@ fatal(char *s)
 
 int main(int argc, char** argv)
 {
+    std::chrono::time_point<std::chrono::system_clock> start, end;
+    double elapsedTime = 0.0;
+    /// Start the Timer
+    start = std::chrono::system_clock::now();
+
     run(argc,argv);
+
+    /// Stop the Timer
+    end = std::chrono::system_clock::now();
+    /// Calculate Elapsed Time
+    std::chrono::duration<double> elapsed_seconds_move = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    elapsedTime = elapsed_seconds_move.count();
+    printf("Elapsed Time: %f", elapsedTime);
 
     return EXIT_SUCCESS;
 }
@@ -109,13 +122,20 @@ void run(int argc, char** argv)
     pin_stats_pause(cycles);
     pin_stats_dump(cycles);
 
-#ifdef BENCH_PRINT
-    for (int i = 0; i < cols; i++)
-            printf("%d ",data[i]) ;
-    printf("\n") ;
-    for (int i = 0; i < cols; i++)
-            printf("%d ",dst[i]) ;
-    printf("\n") ;
+#ifdef BENCH_PRINT
+
+    for (int i = 0; i < cols; i++)
+
+            printf("%d ",data[i]) ;
+
+    printf("\n") ;
+
+    for (int i = 0; i < cols; i++)
+
+            printf("%d ",dst[i]) ;
+
+    printf("\n") ;
+
 #endif
 
     delete [] data;
