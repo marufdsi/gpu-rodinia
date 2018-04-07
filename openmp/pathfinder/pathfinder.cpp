@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <assert.h>
-
+#include<iostream>
 #include "timer.h"
 #include <chrono>
 
