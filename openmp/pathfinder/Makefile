@@ -1,7 +1,7 @@
 CC = g++
 SRC = pathfinder.cpp
 EXE = pathfinder
-FLAGS = -fopenmp
+FLAGS = -fopenmp -std=c++11
 
 release:
 	$(CC) $(SRC) $(FLAGS) -o $(EXE)

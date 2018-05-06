@@ -206,16 +206,22 @@ int main(int argc, char** argv)
 #endif
     init_mergesort(newlistsize);
 #ifdef  TIMING
+	printf("Timing set\n");
 	gettimeofday(&tv_init_end, NULL);
 	tvsub(&tv_init_end, &tv_init_start, &tv);
 	init_time += tv.tv_sec * 1000.0 + (float) tv.tv_usec / 1000.0;
 #endif
+	printf("run merge sort\n");
     clock_t mergesort_start = clock();
+	printf("run merge sort2\n");
     cl_float4 *mergeresult = runMergeSort(newlistsize,DIVISIONS,d_origList,d_resultList,sizes,nullElements,origOffsets);
+	printf("run merge sort3\n");
     clock_t mergesort_diff = clock() - mergesort_start;
+	printf("run merge sort4\n");
 #ifdef  TIMING
 	gettimeofday(&tv_close_start, NULL);
 #endif
+	printf("finish merge sort\n");
     finish_mergesort();
 #ifdef  TIMING
 	gettimeofday(&tv_close_end, NULL);
