@@ -137,6 +137,7 @@ main ( int argc, char *argv[] )
 	stopwatch sw;
 	int platform_id_inuse = 0;
 	int device_id_inuse = 0;
+	stopwatch_start(&sw);
 
 	while ((opt = getopt_long(argc, argv, "::vs:i:p:d:", 
                             long_options, &option_index)) != -1 ) {
@@ -277,7 +278,7 @@ main ( int argc, char *argv[] )
 #endif
 
 	/* beginning of timing point */
-	stopwatch_start(&sw);
+//	stopwatch_start(&sw);
 	cl_event event;
 	err = clEnqueueWriteBuffer(cmd_queue, d_m, 1, 0, matrix_dim*matrix_dim*sizeof(float), m, 0, 0, &event);
 	if(err != CL_SUCCESS) { printf("ERROR: clEnqueueWriteBuffer d_m (size:%lu) => %d\n", matrix_dim*matrix_dim, err); return -1; }
@@ -364,6 +365,8 @@ main ( int argc, char *argv[] )
     clReleaseEvent(event);
 
 	clFinish(cmd_queue);
+	stopwatch_stop(&sw);
+	printf("Time consumed(ms): %lf\n", 1000*get_interval_by_sec(&sw));
 
 #ifdef  TIMING
     gettimeofday(&tv_close_start, NULL);
